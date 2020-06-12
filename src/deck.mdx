@@ -1,0 +1,352 @@
+import { Notes, Invert, Head } from "mdx-deck";
+import { Flex, Box, Heading } from "theme-ui";
+import { CodeSurfer } from "code-surfer";
+import { dracula } from "@code-surfer/themes";
+
+import BgImage from "./components/BgImage";
+import Img from "./components/Img";
+
+import deckTheme from "./theme";
+
+import vrTrend from "./assets/vr-trend.png";
+import aframeLogo from "./assets/aframe-logo.png";
+import comeHere from "./assets/come-here.gif";
+import handControl from "./assets/hand-control.gif";
+
+export const theme = deckTheme;
+
+<Head>
+
+<title>Web VR for all</title>
+
+</Head>
+
+# Web VR For All
+
+## Cross-platform 3D Apps with A-Frame
+
+will@ae.studio | [github.com/will-wow](http://github.com/will-wow)
+
+<Notes>
+
+- Thanks for coming. Today we're going to look into A-Frame, a tool for building 3D experiences on the web, especially for VR and now AR, and some best practices for building experiences that work across devices.
+
+</Notes>
+
+---
+
+# Lunch With AE Studio
+
+<Notes>
+
+- But first, welcome to the first of a lunch talk series!
+- Thanks for trying out Stream. If this goes well, we can use this to reach a wider audience with these talks
+- But for now, let's talk about VR
+
+</Notes>
+
+---
+
+# It's 2020. How's VR doing?
+
+<Img src={vrTrend} />
+
+<Notes>
+
+- VR has been the next big thing for a while now.
+- It's not quite there yet,
+- Steam recently reported crossing over 1m monthly users
+- That's a big audience!
+
+</Notes>
+
+---
+
+<Invert>
+
+# But that's just 1.92% of Steam users
+
+</Invert>
+
+<Notes>
+
+- But even though a lot of people have a headset, by far most people don't
+
+</Notes>
+
+---
+
+# What does this mean for VR in 2020?
+
+- VR is attention-grabbing and has dedicated users
+- Most people will not see your VR app
+- What if you want to play with VR but reach a wide audience?
+- And you work for, say, a web development company?
+
+---
+
+# Enter A-Frame
+
+<Img src={aframeLogo} alt="A-Frame Logo" />
+
+<Notes>
+
+- then do I have the framework for you, imaginary target audience!
+
+</Notes>
+
+---
+
+# A-Frame
+
+- WebVR framework
+- Released by Mozilla in 2015
+- Under active development
+- This year added AR support with the WebXR standard
+
+<Notes>
+
+- WebVR
+- Based on Three.js
+- instead of low-level framework, put together a 3D webapp with html elements and some JS
+- Mozilla project released in 2015, so if VR was 5 years away then... oops?
+- This year the browser WebVR standard changed
+- Now WebXR, supports mobile AR
+- Also broke Aframe 1.0.3, so make sure to only use 1.0.4, because web standards
+- But that's why we use frameworks
+
+</Notes>
+
+---
+
+# A-Frame Hello World
+
+<iframe
+  allowfullscreen="allowfullscreen"
+  height="50%"
+  width="50%"
+  srcdoc='<html> <head> <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script> </head> <body> <a-scene> <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box> <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere> <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" ></a-cylinder> <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" ></a-plane> <a-sky color="#ECECEC"></a-sky> </a-scene> </body> </html>'
+></iframe>
+
+<Notes>
+
+- Here is an embedded Aframe app
+- Sort of the hello world of 3D.
+- Got some shapes, can click and drag, cool.
+- How do you make that?
+
+</Notes>
+
+---
+
+<CodeSurfer theme={dracula}>
+
+```html
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+      <a-cylinder
+        position="1 0.75 -3"
+        radius="0.5"
+        height="1.5"
+        color="#FFC65D"
+      ></a-cylinder>
+      <a-plane
+        position="0 0 -4"
+        rotation="-90 0 0"
+        width="4"
+        height="4"
+        color="#7BC8A4"
+      ></a-plane>
+      <a-sky color="#ECECEC"></a-sky>
+    </a-scene>
+  </body>
+</html>
+```
+
+</CodeSurfer>
+
+<Notes>
+
+- Yeah there's really not much to it
+- A-Frame adds some HTML tags that let you describe this scene pretty declaratively
+- Position is relative to parent
+
+</Notes>
+
+---
+
+<CodeSurfer theme={dracula}>
+
+```jsx
+const HelloWorld = () => (
+  <Scene>
+    <Entity
+      primitive="a-box"
+      position="-1 0.5 -3"
+      rotation="0 45 0"
+      color="#4CC3D9"
+    ></Entity>
+    <Entity
+      primitive="a-sphere"
+      position="0 1.25 -5"
+      radius="1.25"
+      color="#EF2D5E"
+    ></Entity>
+    <Entity
+      primitive="a-cylinder"
+      position="1 0.75 -3"
+      radius="0.5"
+      height="1.5"
+      color="#FFC65D"
+    ></Entity>
+    <Entity
+      primitive="a-plane"
+      position="0 0 -4"
+      rotation="-90 0 0"
+      width="4"
+      height="4"
+      color="#7BC8A4"
+    ></Entity>
+    <Entity primitive="a-sky" color="#ECECEC"></Entity>
+  </Scene>
+);
+```
+
+</CodeSurfer>
+
+<Notes>
+
+- And because I know you'll like this
+- Here's the same component in React!
+- There's an officially supported React wrapper.
+- It's really nice for state management
+- easy to misuse, performance problems
+
+</Notes>
+
+---
+
+# Make it do something!
+
+<Notes>
+
+- making shapes is cool, but they should probably move or something
+
+</Notes>
+
+---
+
+# ECS
+
+- Entity: Elements like `<a-box>` or `<a-entity>`
+- Component: Attributes like `position` or `laser-controls`
+- System: Inter-component singletons like `aabb-collider`
+
+<Notes>
+
+- A-Frame uses the Entity Component System model from games
+- Entities are the raw containers, like boxes, cylinder, and the div of aframe, a-entity.
+  - They may have a simple shape, otherwise don't do much
+- Components are the workhorse of A-Frame. You assign them as HTML attributes
+  - but first you register them
+  - a component is a little class that has access to the underlying THree.js object
+  - takes props
+  - has lifecycle methods like update and tick
+- Finally a System is a singleton that every component with a matching name has access to
+  - for instance, there's an `aabb-collider` component that lets you do simple collision detection.
+  - Everything with `aabb-collider` on it has access to the collider system, which calculates collisions.
+
+</Notes>
+
+---
+
+<CodeSurfer theme={dracula}>
+
+```javascript title="A Door Component"
+AFRAME.registerComponent("door", {
+  schema: {
+    open: { type: "boolean", default: false },
+  }
+  update(oldData) {
+    if (oldData.open === this.data.open) return;
+
+    if (this.data.open) {
+      this.playOpenSound();
+    } else {
+      this.playCloseSound();
+    }
+  },
+  tick(time, delta) {
+    if (this.data.open) {
+      this.open(delta);
+    } else {
+      this.close(delta);
+    }
+  }
+});
+```
+
+```diff 2:4 subtitle="Inputs"
+
+```
+
+```diff 5:13 subtitle="On Update, play a sound"
+
+```
+
+```diff 14:20 subtitle="Do something 90 times a second"
+
+```
+
+</CodeSurfer>
+
+<Notes>
+
+- there are other methods, like on destroy
+- You can also set up event listeners in here for click, collision, or whatever
+
+</Notes>
+
+---
+
+# Okay enough code, want to meet a robot?
+
+---
+
+<iframe src="https://robobuddy.surge.sh" height="75%" width="75%" />
+
+<Notes>
+
+- This is Robobuddy, a little A-Frame friend I've been messing with on the weekends
+- Chases a laser pointer like a cat
+- State machine light
+  - see what he's thinking with light on head
+  - helpful for debugging!
+- Uses Builtin and community Superframe components
+  - Arches, Walk, Look, Laser RayCaster, hand controls
+- For this talk, focus on the UI
+- click Escape, Recall, Sound, Play
+- This is a flat webbrowser, we have tools for UIs there, use them
+- Responsive to mobile, in-game menus could get cut off
+- Hover state and other nice things
+-
+
+</Notes>
+
+---
+
+<BgImage src={handControl} />
+
+---
+
+<BgImage src={comeHere} />
+
+---
+
+# Thanks!
