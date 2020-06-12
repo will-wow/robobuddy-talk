@@ -315,7 +315,30 @@ AFRAME.registerComponent("door", {
 
 ---
 
-# Okay enough code, want to meet a robot?
+# Why WebVR?
+
+- Cross-platform
+- Ease of distributution
+- Familiar language
+
+---
+
+# Cross-Platform 3D
+
+- Desktop
+- Mobile magic window
+- 3DoF (Go & Cardboard)
+- 6DoF (Vive, Rift)
+
+<Notes>
+
+- Four main cases
+
+</Notes>
+
+---
+
+# Okay enough talk, want to meet a robot?
 
 ---
 
@@ -335,7 +358,28 @@ AFRAME.registerComponent("door", {
 - This is a flat webbrowser, we have tools for UIs there, use them
 - Responsive to mobile, in-game menus could get cut off
 - Hover state and other nice things
--
+- But this won't work in VR
+- Okay have to say bye to go to the next slide now
+
+</Notes>
+
+---
+
+# VR is different
+
+<Notes>
+
+- so right, VR is different
+- No DOM elements
+- not responsive
+- HUD is considered bad practice
+- Floating things not normal, and comfort and immersivemess are important
+- May change with AR
+- So while the two ControlPanels can share the events they emit and their logic
+- Render totally differently
+- Either in-universe buttons (on a table, UI on the walls)
+- Or on-arm
+- One way i've seen before is a UI when you turn over hand
 
 </Notes>
 
@@ -343,9 +387,39 @@ AFRAME.registerComponent("door", {
 
 <BgImage src={handControl} />
 
+<Notes>
+
+- I liked that, so that's how the controls show in VR here
+- Notice there's no Play, since it doesn't make sense to pause in VR
+- There is a little math involved, but pretty basic (after a lot of googleing about Euler angles and vectors and looking at my hand)
+- Could also pull a panel from your arm or something
+- This is a more immersive way to do things
+
+</Notes>
+
+---
+
+# Things to keep in mind
+
+- 0, 1 or 2 Hands
+- 3 or 6 Degrees of freedom
+- Raycasters
+- Discoverability
+- Handedness
+- Physical Comfort
+
 ---
 
 <BgImage src={comeHere} />
+
+<Notes>
+
+- I added support for physically pressing the buttons
+- Feels good, but doesn't work for Cardboard or Go
+- Instead also support a raycaster
+- And bonus, A-Frame turns raycaster into click events for ease of use
+
+</Notes>
 
 ---
 
